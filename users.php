@@ -5,7 +5,6 @@ if (isset($_GET['edit'])) {
 	$update=true;
 	$answer = mysqli_query($conn, "SELECT * FROM USERS_13195 WHERE USERID= $id");
 	
-	
 		$record= mysqli_fetch_array($answer);
 		$userid = $record['USERID'];
 		$username = $record['USERNAME'];
