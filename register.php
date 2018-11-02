@@ -27,7 +27,7 @@
     </div>
     <div>
       <label>Password</label>
-      <input type="varchar" name="password">  
+      <input type="password" name="password">  
     </div>
     <div>
       <button type = "submit" name="signup">Sign Up</button>  

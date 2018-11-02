@@ -30,9 +30,8 @@ if (isset($_GET['edit'])) {
 	<div class="topnav">
   <a class="active" href="home.php">Home</a>
   <a href="index.php">Customers</a>
-  <a href="salesperson.php">Salesperson</a>
   <a href="product.php">Products</a>
-  <a href="users.php">Users</a> 
+  <a href="order.php">Sales Order</a> 
   <a href="login.php?logout='1'" style="color: red;">logout</a>
   </div> 
 	<?php if (isset($_SESSION['message'])) { ?>

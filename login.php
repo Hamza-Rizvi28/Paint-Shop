@@ -1,5 +1,3 @@
-<?php include('loginConnection.php') ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +6,7 @@
 </head>
 <body>
   <div class="topnav">
-  <a class="active" href="home.php">Home</a>
+  <a class="active" href="#">Home</a>
   <a href="#">Customers</a>
   <a href="#">Salesperson</a>
   <a href="#">Products</a>
@@ -26,7 +24,7 @@
     </div>
     <div>
       <label>Password</label>
-      <input type="varchar" name="password">  
+      <input type="password" name="password">  
     </div>
     <div>
       <button type = "submit" name="login">Login</button>  

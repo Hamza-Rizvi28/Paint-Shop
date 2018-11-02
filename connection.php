@@ -4,7 +4,7 @@
 
 	$servername = "localhost";
 	$username = "root";
-	$password = "root";
+	$password = "";
 	$dbname= "Project1";
 
 	// Creating connection
@@ -24,6 +24,15 @@
 	$area="";
 	$coordinates="";
 	$update = false;
+
+	$orderid = "";
+		$customername = "";
+		$orderdate = "";
+		$salesperson = "";
+		$product = "";
+		$quantity = "";
+		$rate = "";
+		$amount = "";
 
 	//save button 
 	if (isset($_POST['save'])) {
@@ -65,6 +74,37 @@
 	mysqli_query($conn, "DELETE FROM CUSTOMERS_13195 WHERE SHOPID=$id");
 	$_SESSION['message'] = "Address deleted!"; 
 	header('location: index.php');
-}
+	}
 
+	//save order button 
+	if (isset($_POST['order_save'])) {
+		$orderid = $_POST['ORDERID'];
+		$customername = $_POST['SHOPID'];
+		$orderdate = $_POST['ORDERDATE'];
+		$salesperson = $_POST['SPID'];
+		$product = $_POST['PCODE'];
+		$quantity = $_POST['QUANTITY'];
+		$rate = $_POST['RATE'];
+		$amount = $_POST['AMOUNT'];
+		mysqli_query($conn, "INSERT INTO SALESORDER_13195 VALUES ('$orderid', '$customername', '$orderdate', '$salesperson','$product', '$quantity', '$rate', '$amount')"); 
+		$_SESSION['message'] = "Order saved"; 
+		header('location: index.php');
+	}
+
+	//update order records
+	/*
+	if (isset($_POST['update'])) {
+		$orderid = $_POST['ORDERID'];
+		$customername = $_POST['SHOPID'];
+		$orderdate = $_POST['ORDERDATE'];
+		$salesperson = $_POST['SPID'];
+		$product = $_POST['PCODE'];
+		$quantity = $_POST['QUANTITY'];
+		$rate = $_POST['RATE'];
+		$amount = $_POST['AMOUNT'];
+
+		mysqli_query($conn, "UPDATE SALESO_13195 SET SHOPID='$customerid', SHOPNAME='$customername', CONTACTPERSON='$contactperson', CONTACTNO='$contactnumber', ADDRESS= '$address', AREA='$area', COORDINATES= '$coordinates' WHERE SHOPID=$customerid");
+		$_SESSION['message'] = "Address updated!"; 
+		header('location: index.php');
+	}*/
 ?>
