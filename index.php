@@ -97,6 +97,7 @@ if (isset($_GET['edit'])) {
 	
 		<form method="post" action="connection.php">
 			<!-- <input type="hidden" name="id" value= "<?php echo $customerid; ?>"> -->
+			
 			<div class="input-group">
 				<label>Customer ID</label>
 				<input type="text" name="customerid" value="<?php  echo $customerid?>">

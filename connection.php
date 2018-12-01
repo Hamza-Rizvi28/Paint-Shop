@@ -76,35 +76,58 @@
 	header('location: index.php');
 	}
 
+	//order delete
+	if (isset($_GET['order_del'])) {
+	$id = $_GET['order_del'];
+	mysqli_query($conn, "DELETE FROM SALESORDER_13195 WHERE ORDERID=$id");
+	$_SESSION['message'] = "Order deleted!"; 
+	header('location: order.php');
+	}
+
 	//save order button 
 	if (isset($_POST['order_save'])) {
-		$orderid = $_POST['ORDERID'];
-		$customername = $_POST['SHOPID'];
-		$orderdate = $_POST['ORDERDATE'];
-		$salesperson = $_POST['SPID'];
-		$product = $_POST['PCODE'];
-		$quantity = $_POST['QUANTITY'];
-		$rate = $_POST['RATE'];
-		$amount = $_POST['AMOUNT'];
-		mysqli_query($conn, "INSERT INTO SALESORDER_13195 VALUES ('$orderid', '$customername', '$orderdate', '$salesperson','$product', '$quantity', '$rate', '$amount')"); 
+		$orderid = $_POST['orderid'];
+		$customername = $_POST['customername'];
+		$orderdate = $_POST['orderdate'];
+		$salesperson = $_POST['salesperson'];
+		$product = $_POST['product'];
+		$quantity = $_POST['quantity'];
+		$rate = $_POST['rate'];
+		$amount= intval($quantity) * intval($rate);
+		if ('input[type=checkbox]:checked') {
+			$return='Y';
+		}
+		else {
+			$return= 'N';
+		}
+		
+		//$amount = $_POST['amount'];
+		mysqli_query($conn, "INSERT INTO SALESORDER_13195 VALUES ('$orderid', '$customername', '$orderdate', '$salesperson','$product', '$quantity', '$rate', '$amount', '$return')"); 
 		$_SESSION['message'] = "Order saved"; 
-		header('location: index.php');
+		header('location: order.php');
 	}
 
 	//update order records
-	/*
-	if (isset($_POST['update'])) {
-		$orderid = $_POST['ORDERID'];
-		$customername = $_POST['SHOPID'];
-		$orderdate = $_POST['ORDERDATE'];
-		$salesperson = $_POST['SPID'];
-		$product = $_POST['PCODE'];
-		$quantity = $_POST['QUANTITY'];
-		$rate = $_POST['RATE'];
-		$amount = $_POST['AMOUNT'];
+	
+	if (isset($_POST['order_update'])) {
+		$orderid = $_POST['orderid'];
+		$customername = $_POST['customername'];
+		$orderdate = $_POST['orderdate'];
+		$salesperson = $_POST['salesperson'];
+		$product = $_POST['product'];
+		$quantity = $_POST['quantity'];
+		$rate = $_POST['rate'];
+		$amount = intval($quantity) * intval($rate);
 
-		mysqli_query($conn, "UPDATE SALESO_13195 SET SHOPID='$customerid', SHOPNAME='$customername', CONTACTPERSON='$contactperson', CONTACTNO='$contactnumber', ADDRESS= '$address', AREA='$area', COORDINATES= '$coordinates' WHERE SHOPID=$customerid");
+		if ('input[type=checkbox]:checked') {
+			$return='Y';
+		}
+		else {
+			$return= 'N';
+		}
+
+		mysqli_query($conn, "UPDATE SALESORDER_13195 SET ORDERID='$orderid', SHOPID='$customername', ORDERDATE='$orderdate', SPID='$salesperson', PCODE= '$product', QUANTITY='$quantity', RATE= '$rate', AMOUNT='$amount', SALESRETURN='$return' WHERE ORDERID=$orderid");
 		$_SESSION['message'] = "Address updated!"; 
-		header('location: index.php');
-	}*/
+		header('location: order.php');
+	}
 ?>

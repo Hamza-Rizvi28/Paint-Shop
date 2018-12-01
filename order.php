@@ -1,10 +1,9 @@
  <?php  include('connection.php'); 
 
-if (isset($_GET['edit'])) {
-	$id= $_GET['edit'];
+if (isset($_GET['order_edit'])) {
+	$id= $_GET['order_edit'];
 	$update=true;
 	$answer = mysqli_query($conn, "SELECT * FROM SALESORDER_13195 WHERE ORDERID= $id");
-	
 	
 		$record= mysqli_fetch_array($answer);
 		$orderid = $record['ORDERID'];
@@ -81,17 +80,17 @@ if (isset($_GET['edit'])) {
 			</td>
 			
 			<td>
-				<a href="order.php?edit= <?php echo $row['ORDERID']; ?>" class="edit_btn" >Edit</a>
+				<a href="order.php?order_edit= <?php echo $row['ORDERID']; ?>" class="edit_btn" >Edit</a>
 			</td>
 			<td>
-				<!-- <a href="connection.php?del=<?php echo $row['SHOPID']; ?>" class="del_btn">Delete</a> -->
+				<a href="connection.php?order_del=<?php echo $row['ORDERID']; ?>" class="del_btn">Delete</a>
 			</td>
 		</tr>	
 	<?php } ?>
 </table>
 
 		<form method="post" action="connection.php">
-			<!-- <input type="hidden" name="id" value= "<?php echo $customerid; ?>"> -->
+			
 			<div class="input-group">
 				<label>Order ID</label>
 				<input type="text" name="orderid" value="<?php  echo $orderid?>">
@@ -99,37 +98,78 @@ if (isset($_GET['edit'])) {
 
 			<div class="input-group">
 				<label>Customer Name</label>
-				<input type="text" name="customername" value="<?php  echo $customername?>">
-			</div>
+				
+				<?php $data= mysqli_query($conn, "SELECT SHOPNAME FROM CUSTOMERS_13195"); 
+				echo '<select name="customername">';
+    			echo '<option value="">--Please choose Customer--</option>';
+				while ($row = mysqli_fetch_array($data)) {
+					?>
+					<option value="<?php  echo $row['SHOPNAME']?> "> <?php echo $row['SHOPNAME']; ?>	</option>
+    			<?php	
+				} 
+				echo '</select>';
+				?>
+				</div>
 
 			<div class="input-group">
 				<label>Order Date</label>
-				<input type="text" name="orderdate" value="<?php  echo $orderdate?>">
+				<input type="date" name="orderdate" value="<?php  echo $orderdate?>">
 			</div>
 
 			<div class="input-group">
 				<label>Sales Person</label>
-				<input type="text" name="salesperson" value="<?php  echo $salesperson?>">
+				<?php $data= mysqli_query($conn, "SELECT NAME FROM SALESPERSON_13195"); 
+				echo '<select name="salesperson">';
+    			echo '<option value="">--Please choose Salesperson--</option>';
+    				
+				while ($row = mysqli_fetch_array($data)) {
+					?>
+					<option value="<?php  echo $row['NAME']?> "> <?php echo $row['NAME']; ?>	</option>
+    			<?php	
+				} 
+				echo '</select>';
+				?>
 			</div>
 
 			<div class="input-group">
 				<label>Product</label>
-				<input type="text" name="product" value="<?php  echo $product?>">
+				<?php $data= mysqli_query($conn, "SELECT BRAND FROM PRODUCT_13195"); 
+				echo '<select name="product">';
+    			echo '<option value="">--Please choose Product--</option>';
+    				
+				while ($row = mysqli_fetch_array($data)) {
+					?>
+					<option value="<?php  echo $row['BRAND']?> "> <?php echo $row['BRAND']; ?>	</option>
+    			<?php	
+				} 
+				echo '</select>';
+				?>
 			</div>
 
 			<div class="input-group">
 				<label>Quantity</label>
+
 				<input type="text" name="quantity" value="<?php  echo $quantity?>">
 			</div>
 
 			<div class="input-group">
 				<label>Rate</label>
-				<input type="text" name="rate" value="<?php  echo $rate?>">
+				<?php $data= mysqli_query($conn, "SELECT SALESPRICE FROM PRODUCT_13195"); 
+				echo '<select name= "rate">';
+    			echo '<option value="">--Please choose rate--</option>';
+    				
+				while ($row = mysqli_fetch_array($data)) {
+					?>
+					<option value="<?php  echo $row['SALESPRICE']?> "> <?php echo $row['SALESPRICE']; ?>	</option>
+    			<?php	
+				} 
+				echo '</select>';
+				?>				
 			</div>
 
 			<div class="input-group">
-				<label>Amount</label>
-				<input type="text" name="amount" value="<?php  echo $amount?>">
+				<label>Sales Return</label>
+				<input type="checkbox" name="salesreturn">
 			</div>
 
 			<div class="input-group">
